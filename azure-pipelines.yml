@@ -15,11 +15,11 @@ steps:
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
-
 - task: BrowserStackConfig@0
-  displayName: 'BrowserStack configuration setup'
   inputs:
     BrowserStackServiceEndPoint: 'BrowserStack-Sid'
+    browserstackLocal: true
+    bsLocalOptions: '{ "v": true, "forceLocal": true}'
     
 - task: VSTest@2
   displayName: 'VsTest - testAssemblies'
@@ -30,3 +30,4 @@ steps:
       !**\*TestAdapter.dll
       !**\obj\**
     searchFolder: '$(System.DefaultWorkingDirectory)'
+- task: BrowserStackStopLocal@0
